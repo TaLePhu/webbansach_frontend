@@ -1,7 +1,4 @@
 import React from "react";
-import bookImage1 from "../../../images/books/1.webp";
-import bookImage2 from "../../../images/books/2.webp";
-import bookImage3 from "../../../images/books/3.webp";
 
 const Carousel = () => {
     return(
@@ -11,7 +8,7 @@ const Carousel = () => {
                     <div className="carousel-item active" data-bs-interval="10000">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={bookImage1} className="float-end" style={{width:'150px'}} />
+                                <img src={'/images/books/1.webp'} className="float-end" style={{width:'150px'}} />
                             </div>
                             <div className="col-7">
                                 <h5>First slide label</h5>
@@ -22,7 +19,7 @@ const Carousel = () => {
                     <div className="carousel-item " data-bs-interval="10000">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={bookImage2} className="float-end" style={{width:'150px'}} />
+                                <img src={'/images/books/2.webp'} className="float-end" style={{width:'150px'}} />
                             </div>
                             <div className="col-7">
                                 <h5>First slide label</h5>
@@ -33,7 +30,7 @@ const Carousel = () => {
                     <div className="carousel-item " data-bs-interval="10000">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={bookImage3} className="float-end" style={{width:'150px'}} />
+                                <img src={'/images/books/3.webp'} className="float-end" style={{width:'150px'}} />
                             </div>
                             <div className="col-7">
                                 <h5>First slide label</h5>
