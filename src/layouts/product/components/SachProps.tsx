@@ -1,16 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SachModel from "../../../models/SachModel";
+import HinhAnhModel from "../../../models/HinhAnhModel";
+import { layToanBoAnhCuaMotSach } from "../../../api/HinhAnhAPI";
+import { error, log } from "console";
 
 interface SachPropsInterface {
     sach: SachModel;
 }
 
 const SachProps: React.FC<SachPropsInterface> = (props) => {
+
+    const [danhSachAnh, setDanhSachAnh] = useState<HinhAnhModel[]>([]);
+    const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
+    const [baoLoi, setBaoLoi] = useState(null);
+
+    const maSach:number = props.sach.maSach;
+
+    useEffect(() => {
+        layToanBoAnhCuaMotSach(maSach).then(
+            hinhAnhData => {
+                setDanhSachAnh(hinhAnhData);
+                setDangTaiDuLieu(false);
+            }
+        ).catch(
+            error => {
+                setDangTaiDuLieu(false);
+                setBaoLoi(error.message);
+            }
+        )
+    }, []);
+
+    if(dangTaiDuLieu) {
+        return(
+            <div>
+                <h1>Đang tải dữ liệu</h1>
+            </div>
+        )
+    }
+
+    if(baoLoi) {
+        return(
+            <div>
+                <h1>thông báo lỗi: {baoLoi}</h1>
+            </div>
+        )
+    }
+    console.log(danhSachAnh);
+    
+
+    let duLieuAnh: string = "";
+    if(danhSachAnh[0] && danhSachAnh[0].duLieuAnh) {
+        duLieuAnh = danhSachAnh[0].duLieuAnh;
+    }
+
     return(
         <div className="col-md-3 mt-2">
         <div className="card">
             <img
-                src={""}
+                src={duLieuAnh}
                 className="card-img-top"
                 alt={props.sach.tenSach}
                 style={{ height: '200px' }}

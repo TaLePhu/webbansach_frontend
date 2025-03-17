@@ -1,17 +1,8 @@
 import React from "react";
 import SachModel from "../models/SachModel";
 import { log } from "console";
+import { my_request } from "./Request";
 
-export async function my_request(duongDan: string) {
-    //truy van endpoint
-    const response = await fetch(duongDan);
-
-    if(!response.ok) {
-        throw new Error(`không thể truy cập ${duongDan}`);
-    }
-
-    return response.json();
-}
 
 export async function layToanBoSach(): Promise<SachModel[]> {
     const ketQua: SachModel[] = [];
@@ -22,7 +13,7 @@ export async function layToanBoSach(): Promise<SachModel[]> {
     //goi phuong thuc request
     const response = await my_request(duongDan);
 
-    // console.log(response);
+    // console.log("response", response);
     
     // lay ra json sach
     const responseData = response._embedded.saches;
