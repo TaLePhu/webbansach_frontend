@@ -1,6 +1,6 @@
-import { error, log } from "console";
 import React from "react";
 import SachModel from "../models/SachModel";
+import { log } from "console";
 
 export async function my_request(duongDan: string) {
     //truy van endpoint
@@ -22,7 +22,9 @@ export async function layToanBoSach(): Promise<SachModel[]> {
     //goi phuong thuc request
     const response = await my_request(duongDan);
 
-    // lay ra jjson sach
+    // console.log(response);
+    
+    // lay ra json sach
     const responseData = response._embedded.saches;
     console.log(responseData);
 
