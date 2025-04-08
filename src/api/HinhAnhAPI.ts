@@ -3,24 +3,18 @@ import HinhAnhModel from "../models/HinhAnhModel";
 import { my_request } from "./Request";
 
 
-
-
-export async function layToanBoAnhCuaMotSach(maSach: number): Promise<HinhAnhModel[]> {
-    
+async function layAnhCuaMotSach(duongDan:string): Promise<HinhAnhModel[]> {
     const ketQua: HinhAnhModel[] = [];
 
-    //xac dinh endpoint;
-    const duongDan = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh`;
+    
 
     const response = await my_request(duongDan);
 
-    console.log(response);
+    // console.log(response);
     
-    
-
     const responseData = response._embedded.hinhAnhs;
 
-    console.log(responseData);
+    // console.log(responseData);
     
     for(const key in responseData) {
         ketQua.push({
@@ -34,5 +28,19 @@ export async function layToanBoAnhCuaMotSach(maSach: number): Promise<HinhAnhMod
 
 
     return ketQua;
+}
+
+export async function layToanBoAnhCuaMotSach(maSach: number): Promise<HinhAnhModel[]> {
+    //xac dinh endpoint;
+    const duongDan = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh`;
+    
+    return layAnhCuaMotSach(duongDan);
+}
+
+export async function lay1AnhCuaMotSach(maSach: number): Promise<HinhAnhModel[]> {
+    //xac dinh endpoint;
+    const duongDan = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh?sort=maHinhAnh,asc&page=0&size=1`;
+    
+    return layAnhCuaMotSach(duongDan);
 }
 

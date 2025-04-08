@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SachModel from "../../../models/SachModel";
 import HinhAnhModel from "../../../models/HinhAnhModel";
 import { layToanBoAnhCuaMotSach } from "../../../api/HinhAnhAPI";
-import { error, log } from "console";
 
 interface SachPropsInterface {
     sach: SachModel;
@@ -45,7 +44,7 @@ const SachProps: React.FC<SachPropsInterface> = (props) => {
             </div>
         )
     }
-    console.log(danhSachAnh);
+    // console.log(danhSachAnh);
     
 
     let duLieuAnh: string = "";

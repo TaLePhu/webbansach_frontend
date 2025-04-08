@@ -8,9 +8,9 @@ const Banner = () => {
                 justify-content-center align-items-center" >
                     <div>
                         <h3 className="display-5 fw-bold">
-                             Đọc sách chính là hộ chiếu <br/> cho vô số cuộc phiêu lưu
+                        Như thế nào là một thể xác không có tâm hồn?<br/> Đó là một căn phòng không có nổi một quyển sách.
                         </h3>
-                        <p className="">Mary Pope Osborne</p>
+                        <p className="">Cicero</p>
                         <button className="btn btn-primary btn-lg text-white float-end">Khám phá sách tại my Bookstore</button>                        
                     </div>
                 </div>

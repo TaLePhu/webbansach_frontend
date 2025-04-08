@@ -1,19 +1,14 @@
 import React from "react";
 import SachModel from "../models/SachModel";
-import { log } from "console";
 import { my_request } from "./Request";
 
 
-export async function layToanBoSach(): Promise<SachModel[]> {
+async function laySach(duongDan: string): Promise<SachModel[]> {
     const ketQua: SachModel[] = [];
 
-    //xac dinh endpoint
-    const duongDan: string = 'http://localhost:8080/sach';
-
-    //goi phuong thuc request
     const response = await my_request(duongDan);
 
-    // console.log("response", response);
+    console.log("response", response); //return Obj => đi vào _embedded lấy ra saches[]
     
     // lay ra json sach
     const responseData = response._embedded.saches;
@@ -33,4 +28,24 @@ export async function layToanBoSach(): Promise<SachModel[]> {
     }
     
     return ketQua;
+}
+
+export async function layToanBoSach(): Promise<SachModel[]> {
+    
+
+    //xac dinh endpoint
+    const duongDan: string = 'http://localhost:8080/sach?sort=maSach,desc';
+
+    return laySach(duongDan);
+    
+}
+
+export async function lay3SachMoiNhat(): Promise<SachModel[]> {
+    
+
+    //xac dinh endpoint
+    const duongDan: string = 'http://localhost:8080/sach?sort=maSach,desc&page=0&size=3';
+
+    return laySach(duongDan);
+    
 }
