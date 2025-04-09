@@ -1,33 +1,47 @@
 import React, { use, useEffect, useState } from 'react';
 import SachModel from '../../models/SachModel';
 import SachProps from './components/SachProps';
-import { layToanBoSach } from '../../api/SachAPI';
+import { layToanBoSach, timKiemSach } from '../../api/SachAPI';
 import PhanTrang from '../utils/PhanTrang';
-import { log } from 'console';
 
-const DanhSachSanPham: React.FC = () => {
+interface DanhSachSanPhamProps {
+    tuKhoaTimKiem: string;
+}
+
+function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
     const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
     const [baoLoi, setBaoLoi] = useState(null);
     const [trangHienTai, setTrangHienTai] = useState(1);
-    const [tongSoSach, setTongSoSach] = useState(0);
+    // const [tongSoSach, setTongSoSach] = useState(0);
     const [tongSoTrang, setTongSoTrang] = useState(0);
 
-    console.log(trangHienTai);
-    console.log('tong so trang:', tongSoTrang);
+    console.log('tu khoa tim kiem:', tuKhoaTimKiem);
 
     useEffect(() => {
-        layToanBoSach(trangHienTai - 1)
-            .then((kq) => {
-                setDanhSachQuyenSach(kq.ketQua);
-                setTongSoTrang(kq.tongSoTrang);
-                setDangTaiDuLieu(false);
-            })
-            .catch((error) => {
-                setDangTaiDuLieu(false);
-                setBaoLoi(error.message);
-            });
-    }, [trangHienTai]);
+        if (tuKhoaTimKiem === '') {
+            layToanBoSach(trangHienTai - 1)
+                .then((kq) => {
+                    setDanhSachQuyenSach(kq.ketQua);
+                    setTongSoTrang(kq.tongSoTrang);
+                    setDangTaiDuLieu(false);
+                })
+                .catch((error) => {
+                    setDangTaiDuLieu(false);
+                    setBaoLoi(error.message);
+                });
+        } else
+            timKiemSach(tuKhoaTimKiem)
+                .then((kq) => {
+                    setDanhSachQuyenSach(kq.ketQua);
+                    setTongSoTrang(kq.tongSoTrang);
+                    setDangTaiDuLieu(false);
+                })
+                .catch((error) => {
+                    setDangTaiDuLieu(false);
+                    setBaoLoi(error.message);
+                });
+    }, [trangHienTai, tuKhoaTimKiem]);
 
     if (dangTaiDuLieu) {
         return (
@@ -61,6 +75,6 @@ const DanhSachSanPham: React.FC = () => {
             <PhanTrang trangHienTai={trangHienTai} tongSoTrang={tongSoTrang} phanTrang={phanTrang} />
         </div>
     );
-};
+}
 
 export default DanhSachSanPham;

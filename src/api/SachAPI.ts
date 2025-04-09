@@ -1,7 +1,5 @@
-import React from 'react';
 import SachModel from '../models/SachModel';
 import { my_request } from './Request';
-import { log } from 'console';
 
 interface KetQuaInterface {
     ketQua: SachModel[];
@@ -49,6 +47,18 @@ export async function layToanBoSach(trang: number): Promise<KetQuaInterface> {
 export async function lay3SachMoiNhat(): Promise<KetQuaInterface> {
     //xac dinh endpoint
     const duongDan: string = 'http://localhost:8080/sach?sort=maSach,desc&page=0&size=3';
+
+    return laySach(duongDan);
+}
+
+//http://localhost:8080/sach/search/findByTenSachContaining?tenSach=tieu%20thuy
+
+export async function timKiemSach(tuKhoaTimKiem: string): Promise<KetQuaInterface> {
+    let duongDan = `http://localhost:8080/sach?sort=maSach,desc&size=8&page=0`;
+
+    if (tuKhoaTimKiem !== '') {
+        duongDan = `http://localhost:8080/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${tuKhoaTimKiem}`;
+    }
 
     return laySach(duongDan);
 }
