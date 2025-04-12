@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SachModel from '../../models/SachModel';
 import SachProps from './components/SachProps';
 import { layToanBoSach, timKiemSach } from '../../api/SachAPI';
@@ -6,9 +6,10 @@ import PhanTrang from '../utils/PhanTrang';
 
 interface DanhSachSanPhamProps {
     tuKhoaTimKiem: string;
+    maTheLoai: number;
 }
 
-function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
+function DanhSachSanPham({ tuKhoaTimKiem, maTheLoai }: DanhSachSanPhamProps) {
     const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
     const [baoLoi, setBaoLoi] = useState(null);
@@ -16,7 +17,7 @@ function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
     // const [tongSoSach, setTongSoSach] = useState(0);
     const [tongSoTrang, setTongSoTrang] = useState(0);
 
-    console.log('tu khoa tim kiem:', tuKhoaTimKiem);
+    // console.log('tu khoa tim kiem:', tuKhoaTimKiem);
 
     useEffect(() => {
         if (tuKhoaTimKiem === '') {
@@ -31,7 +32,7 @@ function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
                     setBaoLoi(error.message);
                 });
         } else
-            timKiemSach(tuKhoaTimKiem)
+            timKiemSach(tuKhoaTimKiem, maTheLoai)
                 .then((kq) => {
                     setDanhSachQuyenSach(kq.ketQua);
                     setTongSoTrang(kq.tongSoTrang);
@@ -63,6 +64,16 @@ function DanhSachSanPham({ tuKhoaTimKiem }: DanhSachSanPhamProps) {
     const phanTrang = (trang: number) => {
         setTrangHienTai(trang);
     };
+
+    if (danhSachQuyenSach.length === 0) {
+        return (
+            <div className="container">
+                <div className="row mt-4 mb-4">
+                    <h1>không có sách khớp với từ khóa tìm kiếm của bạn !!!</h1>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="container">

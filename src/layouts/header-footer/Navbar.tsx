@@ -6,15 +6,19 @@ interface NavbarProps {
 }
 
 function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
+    const [tuKhoaTamThoi, setTuKhoaTamThoi] = useState('');
+
     const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setTuKhoaTimKiem(e.target.value);
+        setTuKhoaTamThoi(e.target.value);
     };
 
-    // const handleSearch = () => {
-    // };
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        setTuKhoaTimKiem(tuKhoaTamThoi);
+    };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">
                     Bookstore
@@ -105,14 +109,14 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                 </div>
 
                 {/* Tìm kiếm */}
-                <form className="d-flex">
+                <form className="d-flex" onSubmit={handleSearch}>
                     <input
                         className="form-control me-2"
                         type="search"
                         placeholder="Tìm kiếm"
                         aria-label="Search"
                         onChange={onSearchInputChange}
-                        value={tuKhoaTimKiem}
+                        value={tuKhoaTamThoi}
                     />
                     <button className="btn btn-outline-success" type="submit">
                         Search

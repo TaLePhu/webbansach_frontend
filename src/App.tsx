@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from './layouts/header-footer/Navbar';
 import Footer from './layouts/header-footer/Footer';
 import HomePage from './layouts/homepage/HomePage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import About from './pages/About/About';
 
 function App() {
     const [tuKhoaTimKiem, setTuKhoaTimKiem] = useState('');
@@ -10,11 +12,15 @@ function App() {
     // console.log('tu khoa tim kiem: ', tuKhoaTimKiem);
 
     return (
-        <div>
+        <BrowserRouter>
             <Navbar tuKhoaTimKiem={tuKhoaTimKiem} setTuKhoaTimKiem={setTuKhoaTimKiem} />
-            <HomePage tuKhoaTimKiem={tuKhoaTimKiem} />
+            <Routes>
+                <Route path="/" element={<HomePage tuKhoaTimKiem={tuKhoaTimKiem} />} />
+                <Route path="/:maTheLoai" element={<HomePage tuKhoaTimKiem={tuKhoaTimKiem} />} />
+                <Route path="/about" element={<About />} />
+            </Routes>
             <Footer />
-        </div>
+        </BrowserRouter>
     );
 }
 

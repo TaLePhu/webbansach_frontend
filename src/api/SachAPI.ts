@@ -53,12 +53,20 @@ export async function lay3SachMoiNhat(): Promise<KetQuaInterface> {
 
 //http://localhost:8080/sach/search/findByTenSachContaining?tenSach=tieu%20thuy
 
-export async function timKiemSach(tuKhoaTimKiem: string): Promise<KetQuaInterface> {
+export async function timKiemSach(tuKhoaTimKiem: string, maTheLoai: number): Promise<KetQuaInterface> {
     let duongDan = `http://localhost:8080/sach?sort=maSach,desc&size=8&page=0`;
 
     if (tuKhoaTimKiem !== '') {
         duongDan = `http://localhost:8080/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${tuKhoaTimKiem}`;
     }
+
+    // if (tuKhoaTimKiem === '' && maTheLoai > 0) {
+    //     duongDan = `http://localhost:8080/sach/search/findByDanhSachTheLoai_MaTheLoai?sort=maSach,desc&size=8&page=0&maTheLoai=${maTheLoai}`;
+    // }
+
+    // if (tuKhoaTimKiem !== '' && maTheLoai > 0) {
+    //     duongDan = ``;
+    // }
 
     return laySach(duongDan);
 }
