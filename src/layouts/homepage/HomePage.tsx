@@ -9,7 +9,7 @@ interface HomePageProp {
 }
 
 function HomePage({ tuKhoaTimKiem }: HomePageProp) {
-    const { maTheLoai } = useParams(); // lây maTheLoai từ url gán vào maTheLoai
+    const { maTheLoai } = useParams(); // get maTheLoai từ url gán vào maTheLoai
 
     let maTheLoaiNumber = 0;
 

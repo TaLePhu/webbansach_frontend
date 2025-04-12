@@ -60,13 +60,13 @@ export async function timKiemSach(tuKhoaTimKiem: string, maTheLoai: number): Pro
         duongDan = `http://localhost:8080/sach/search/findByTenSachContaining?sort=maSach,desc&size=8&page=0&tenSach=${tuKhoaTimKiem}`;
     }
 
-    // if (tuKhoaTimKiem === '' && maTheLoai > 0) {
-    //     duongDan = `http://localhost:8080/sach/search/findByDanhSachTheLoai_MaTheLoai?sort=maSach,desc&size=8&page=0&maTheLoai=${maTheLoai}`;
-    // }
+    if (tuKhoaTimKiem === '' && maTheLoai > 0) {
+        duongDan = `http://localhost:8080/sach/search/findByDanhSachTheLoai_MaTheLoai?sort=maSach,desc&size=8&page=0&maTheLoai=${maTheLoai}`;
+    }
 
-    // if (tuKhoaTimKiem !== '' && maTheLoai > 0) {
-    //     duongDan = ``;
-    // }
+    if (tuKhoaTimKiem !== '' && maTheLoai > 0) {
+        duongDan = `http://localhost:8080/sach/search/findByTenSachContainingAndDanhSachTheLoai_MaTheLoai?sort=maSach,desc&size=8&page=0&tenSach=${tuKhoaTimKiem}&maTheLoai=${maTheLoai}`;
+    }
 
     return laySach(duongDan);
 }
