@@ -14,7 +14,6 @@ function DanhSachSanPham({ tuKhoaTimKiem, maTheLoai }: DanhSachSanPhamProps) {
     const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
     const [baoLoi, setBaoLoi] = useState(null);
     const [trangHienTai, setTrangHienTai] = useState(1);
-    // const [tongSoSach, setTongSoSach] = useState(0);
     const [tongSoTrang, setTongSoTrang] = useState(0);
 
     useEffect(() => {

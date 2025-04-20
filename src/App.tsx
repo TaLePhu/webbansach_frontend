@@ -5,6 +5,7 @@ import Footer from './layouts/header-footer/Footer';
 import HomePage from './layouts/homepage/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './pages/About/About';
+import SignUp from './layouts/user/SignUp';
 
 function App() {
     const [tuKhoaTimKiem, setTuKhoaTimKiem] = useState('');
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/" element={<HomePage tuKhoaTimKiem={tuKhoaTimKiem} />} />
                 <Route path="/:maTheLoai" element={<HomePage tuKhoaTimKiem={tuKhoaTimKiem} />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/dangKy" element={<SignUp />} />
             </Routes>
             <Footer />
         </BrowserRouter>
