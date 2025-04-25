@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './pages/About/About';
 import SignUp from './layouts/user/SignUp';
 import Activate from './layouts/user/Activate';
+import SignIn from './layouts/user/SignIn';
+import Test from './layouts/user/Test';
 
 function App() {
     const [tuKhoaTimKiem, setTuKhoaTimKiem] = useState('');
@@ -21,6 +23,8 @@ function App() {
                 <Route path="/:maTheLoai" element={<HomePage tuKhoaTimKiem={tuKhoaTimKiem} />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/dang-ky" element={<SignUp />} />
+                <Route path="/dang-nhap" element={<SignIn />} />
+                <Route path="/test" element={<Test />} />
                 <Route path="/kich-hoat/:email/:maKichHoat" element={<Activate />} />
             </Routes>
             <Footer />
