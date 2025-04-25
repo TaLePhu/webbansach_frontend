@@ -52,6 +52,8 @@ function SignUp() {
                         ten: ten,
                         soDienThoai: soDienThoai,
                         gioiTinh: gioiTinh.charAt(0), // Lấy ký tự đầu tiên của chuỗi
+                        daKichHoat: 0,
+                        maKichHoat: '',
                     }),
                 });
 
