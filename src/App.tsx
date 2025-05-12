@@ -9,6 +9,7 @@ import SignUp from './layouts/user/SignUp';
 import Activate from './layouts/user/Activate';
 import SignIn from './layouts/user/SignIn';
 import Test from './layouts/user/Test';
+import SachForm from './pages/admin/SachForm';
 
 function App() {
     const [tuKhoaTimKiem, setTuKhoaTimKiem] = useState('');
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/dang-nhap" element={<SignIn />} />
                 <Route path="/test" element={<Test />} />
                 <Route path="/kich-hoat/:email/:maKichHoat" element={<Activate />} />
+                <Route path="/admin/them-sach" element={<SachForm />} />
             </Routes>
             <Footer />
         </BrowserRouter>
