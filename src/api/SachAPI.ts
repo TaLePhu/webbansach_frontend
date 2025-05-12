@@ -16,12 +16,14 @@ async function laySach(duongDan: string): Promise<KetQuaInterface> {
 
     // lay ra json sach
     const responseData = response._embedded.saches;
+    console.log('data: ', responseData);
 
     const tongSoSach: number = response.page.totalElements;
 
     const tongSoTrang: number = response.page.totalPages;
 
     for (const key in responseData) {
+        // ketQua[maSach: maSach, tenSach: tenSach]
         ketQua.push({
             maSach: responseData[key].maSach,
             tenSach: responseData[key].tenSach,
@@ -69,4 +71,35 @@ export async function timKiemSach(tuKhoaTimKiem: string, maTheLoai: number): Pro
     }
 
     return laySach(duongDan);
+}
+
+export async function laySachTheoMa(maSach: number): Promise<SachModel | null> {
+    const duongDan: string = `http://localhost:8080/sach/${maSach}`;
+
+    try {
+        const response = await fetch(duongDan);
+
+        if (!response.ok) {
+            throw new Error('không thể truy cập ' + duongDan);
+        }
+        const data = await response.json();
+
+        if (data) {
+            return {
+                maSach: data.maSach,
+                tenSach: data.tenSach,
+                giaBan: data.giaBan,
+                giaNiemYet: data.giaNiemYet,
+                moTa: data.moTa,
+                soLuong: data.soLuong,
+                tenTacGia: data.tenTacGia,
+                trungBinhXepHang: data.trungBinhXepHang,
+            };
+        } else {
+            throw new Error('không có sách nào');
+        }
+    } catch (error) {
+        console.log('error: ', error);
+        return null;
+    }
 }

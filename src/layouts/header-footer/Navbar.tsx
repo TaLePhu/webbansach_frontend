@@ -43,6 +43,7 @@ function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
                                 Trang chủ
                             </Link>
                         </li>
+                        {/* Thể loại  */}
                         <li className="nav-item dropdown">
                             <Link
                                 className="nav-link dropdown-toggle"
